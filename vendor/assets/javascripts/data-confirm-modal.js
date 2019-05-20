@@ -118,7 +118,7 @@
   var buildElementModal = function (element) {
     var options = {
       title:             element.data('title') || element.attr('title') || element.data('original-title'),
-      text:              element.data('confirm'),
+      text:              element.data('text'),
       focus:             element.data('focus'),
       method:            element.data('method'),
       modalClass:        element.data('modal-class'),
@@ -208,9 +208,13 @@
 
     var body = modal.find('.modal-body');
 
-    $.each((options.text||'').split(/\n{2}/), function (i, piece) {
-      body.append($('<p/>').html(piece));
-    });
+    if (!options.text) {
+      $.each((options.text||'').split(/\n{2}/), function (i, piece) {
+        body.append($('<p/>').html(piece));
+      });
+    } else {
+      body.hide()
+    }
 
     var commit = modal.find('.commit');
     commit.text(options.commit || settings.commit);
