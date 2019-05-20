@@ -208,8 +208,9 @@
 
     var body = modal.find('.modal-body');
 
-    if (!options.text) {
-      $.each((options.text||'').split(/\n{2}/), function (i, piece) {
+    if (options.text) {
+      var text = options.text.toString()
+      $.each((text).split(/\n{2}/), function (i, piece) {
         body.append($('<p/>').html(piece));
       });
     } else {
